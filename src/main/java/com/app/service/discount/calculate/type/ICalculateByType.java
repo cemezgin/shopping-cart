@@ -11,5 +11,5 @@ public interface ICalculateByType {
 
     void setCoupon(Coupon coupon);
 
-    void applyDiscount();
+    double applyDiscount();
 }

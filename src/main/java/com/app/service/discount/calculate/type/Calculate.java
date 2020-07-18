@@ -24,7 +24,7 @@ public class Calculate {
         typeStrategy.setCoupon(coupon);
     }
 
-    public void applyDiscount() {
-        typeStrategy.applyDiscount();
+    public double applyDiscount() {
+        return typeStrategy.applyDiscount();
     }
 }

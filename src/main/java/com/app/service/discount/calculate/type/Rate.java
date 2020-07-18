@@ -25,8 +25,10 @@ public class Rate implements ICalculateByType {
         this.shoppingCart = shoppingCart;
     }
 
-    public void applyDiscount() {
+    public double applyDiscount() {
         double netDiscountAsAmount = shoppingCart.getTotalPrice() * (discountStyle.getDiscount() / 100);
-        shoppingCart.setTotalPrice(shoppingCart.getTotalPrice() - netDiscountAsAmount);
+        shoppingCart.setTotalAmountAfterDiscounts(shoppingCart.getTotalPrice() - netDiscountAsAmount);
+
+        return netDiscountAsAmount;
     }
 }

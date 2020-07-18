@@ -5,7 +5,7 @@ import com.app.service.cart.ShoppingCart;
 import com.app.service.discount.calculate.Discount;
 import com.app.service.discount.calculate.type.Calculate;
 
-public class CampaignCalculator implements ICalculator{
+public class CampaignCalculator implements ICalculator {
     private final ShoppingCart shoppingCart;
     private final Campaign campaign;
 
@@ -13,6 +13,7 @@ public class CampaignCalculator implements ICalculator{
         this.shoppingCart = shoppingCart;
         this.campaign = campaign;
     }
+
     public void calculate() {
         shoppingCart.getShoppingCart().forEach(cartItem -> {
             int count = 0;
@@ -32,6 +33,7 @@ public class CampaignCalculator implements ICalculator{
         Calculate calculate = new Calculate(discount.setDiscountType(campaign.getDiscountType()));
         calculate.setCampaign(campaign);
         calculate.setShoppingCart(shoppingCart);
-        calculate.applyDiscount();
+        double finalDiscountAmount = calculate.applyDiscount();
+        shoppingCart.setTotalCampaignDiscount(shoppingCart.getTotalCampaignDiscount() + finalDiscountAmount);
     }
 }

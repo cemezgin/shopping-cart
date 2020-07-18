@@ -5,7 +5,7 @@ import com.app.service.cart.ShoppingCart;
 import com.app.service.discount.calculate.Discount;
 import com.app.service.discount.calculate.type.Calculate;
 
-public class CouponCalculator implements ICalculator{
+public class CouponCalculator implements ICalculator {
     private final ShoppingCart shoppingCart;
     private final Coupon coupon;
 
@@ -20,7 +20,8 @@ public class CouponCalculator implements ICalculator{
             Calculate calculate = new Calculate(discount.setDiscountType(coupon.getDiscountType()));
             calculate.setCoupon(coupon);
             calculate.setShoppingCart(shoppingCart);
-            calculate.applyDiscount();
+            double finalDiscountAmount = calculate.applyDiscount();
+            shoppingCart.setTotalCouponDiscount(shoppingCart.getTotalCouponDiscount() + finalDiscountAmount);
         }
     }
 }

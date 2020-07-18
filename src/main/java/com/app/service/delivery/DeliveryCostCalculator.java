@@ -6,29 +6,28 @@ import com.app.service.cart.ShoppingCart;
 
 import java.util.*;
 
-public class DeliveryCostCalculator implements IDeliveryCostCalculator {
+public class DeliveryCostCalculator {
     public static final double FIXED_COST = 2.99;
 
     private double costPerDelivery;
     private double costPerProduct;
-    private double fixedCost;
 
-    public DeliveryCostCalculator(double costPerDelivery, double costPerProduct, double fixedCost) {
+    public DeliveryCostCalculator(double costPerDelivery, double costPerProduct) {
         this.costPerDelivery = costPerDelivery;
         this.costPerProduct = costPerProduct;
-        this.fixedCost = fixedCost;
     }
 
-    public double calculateFor(ShoppingCart cart) {
-        return calculate(calculateNumberOfDeliveries(cart.getShoppingCart()), cart.getShoppingCart().size());
+    public void calculateFor(ShoppingCart cart) {
+        double deliveryCost = calculate(
+                calculateNumberOfDeliveries(cart.getShoppingCart()), cart.getShoppingCart().size());
+        cart.setDeliveryCost(deliveryCost);
     }
 
     private double calculate(int numberOfDeliveries, int numberOfProducts) {
-        return (costPerDelivery * numberOfDeliveries) + (costPerProduct * numberOfProducts) + fixedCost;
+        return (costPerDelivery * numberOfDeliveries) + (costPerProduct * numberOfProducts) + FIXED_COST;
     }
 
-    private int calculateNumberOfDeliveries(Set<CartItem> cartItems)
-    {
+    private int calculateNumberOfDeliveries(Set<CartItem> cartItems) {
         Set<Category> categoryHashSet = new HashSet<>();
 
         cartItems.forEach(cartItem -> {
