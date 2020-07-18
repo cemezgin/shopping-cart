@@ -4,8 +4,7 @@ public class CartItem {
     private Product product;
     private int quantity;
 
-    public CartItem(Product product, int quantity)
-    {
+    public CartItem(Product product, int quantity) {
         this.setProduct(product);
         this.setQuantity(quantity);
     }

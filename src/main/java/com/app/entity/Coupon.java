@@ -1,15 +1,15 @@
 package com.app.entity;
 
-import com.app.service.discount.calculate.DiscountType;
+import com.app.service.discount.calculate.campaign.DiscountType;
 
 public class Coupon {
     private int minimumAmount;
-    private float discount;
+    private double discount;
     private DiscountType discountType;
 
     public Coupon(
             int minimumAmount,
-            float discount,
+            double discount,
             DiscountType discountType
     ) {
         this.setDiscount(discount);
@@ -33,11 +33,11 @@ public class Coupon {
         this.minimumAmount = minimumAmount;
     }
 
-    public float getDiscount() {
+    public double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(float discount) {
+    public void setDiscount(double discount) {
         this.discount = discount;
     }
 }

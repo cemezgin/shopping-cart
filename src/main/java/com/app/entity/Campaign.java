@@ -1,22 +1,22 @@
 package com.app.entity;
 
-import com.app.service.discount.calculate.DiscountType;
+import com.app.service.discount.calculate.campaign.DiscountType;
 
 public class Campaign {
     private Category category;
-    private float discount;
-    private int minimumAmount;
+    private double discount;
+    private int minimumItem;
     private DiscountType discountType;
 
     public Campaign(
             Category category,
-            float discount,
-            int minimumAmount,
+            double discount,
+            int minimumItem,
             DiscountType discountType
     ) {
         this.setCategory(category);
         this.setDiscount(discount);
-        this.setMinimumAmount(minimumAmount);
+        this.setMinimumItem(minimumItem);
         this.setDiscountType(discountType);
     }
 
@@ -28,20 +28,20 @@ public class Campaign {
         this.category = category;
     }
 
-    public float getDiscount() {
+    public double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(float discount) {
+    public void setDiscount(double discount) {
         this.discount = discount;
     }
 
-    public int getMinimumAmount() {
-        return minimumAmount;
+    public int getMinimumItem() {
+        return minimumItem;
     }
 
-    public void setMinimumAmount(int minimumAmount) {
-        this.minimumAmount = minimumAmount;
+    public void setMinimumItem(int minimumItem) {
+        this.minimumItem = minimumItem;
     }
 
     public DiscountType getDiscountType() {
