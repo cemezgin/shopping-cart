@@ -7,7 +7,7 @@ import com.app.service.discount.calculate.calculator.*;
 
 import java.util.*;
 
-public class ShoppingCart implements IShoppingCart {
+public class ShoppingCart {
     private final Set<CartItem> shoppingCart = new HashSet<>();
     private List<Campaign> campaignSet = new ArrayList<>();
     private double totalPrice = 0.0;
@@ -20,13 +20,11 @@ public class ShoppingCart implements IShoppingCart {
         this.totalAmountAfterDiscounts = totalPrice;
     }
 
-    public double getTotalAmountAfterDiscounts()
-    {
+    public double getTotalAmountAfterDiscounts() {
         return totalAmountAfterDiscounts;
     }
 
-    public void setTotalCouponDiscount(double totalCouponDiscount)
-    {
+    public void setTotalCouponDiscount(double totalCouponDiscount) {
         this.totalCouponDiscount = totalCouponDiscount;
     }
 
@@ -79,5 +77,44 @@ public class ShoppingCart implements IShoppingCart {
     public void applyCoupon(Coupon coupon) {
         Calculator calculator = new Calculator(new CouponCalculator(this, coupon));
         calculator.calculate();
+    }
+
+    private HashMap<Category, Set<CartItem>> getCategorizedShoppingCart() {
+        HashMap<Category, Set<CartItem>> categorizedShoppingCart = new HashMap<>();
+        getShoppingCart().forEach(cartItem -> {
+            Category category = cartItem.getProduct().getCategory();
+            if (categorizedShoppingCart.containsKey(category)) {
+                categorizedShoppingCart.get(category).add(cartItem);
+            } else {
+                categorizedShoppingCart.put(category, new HashSet<>());
+            }
+        });
+
+        return categorizedShoppingCart;
+    }
+
+    public void print() {
+        HashMap<Category, Set<CartItem>> categorizedShoppingCart = getCategorizedShoppingCart();
+
+        categorizedShoppingCart.forEach((category, cartItems) -> {
+            System.out.println("------ Category: " + category.getTitle() + " ------");
+            cartItems.forEach(cartItem -> {
+                double price = cartItem.getProduct().getPrice();
+                double quantity = cartItem.getQuantity();
+                System.out.println("Product: " + cartItem.getProduct().getTitle());
+                System.out.println("Quantity: " + quantity);
+                System.out.println("Unit Price: " + price);
+                System.out.println("Total Price: " + price * quantity);
+                System.out.println("-x-x-x-x-x-x-x-x-x-x-");
+            });
+
+            System.out.println("Total Amount: " + getTotalPrice());
+            System.out.println("Total Coupon Discount: " + getTotalCouponDiscount());
+            System.out.println("Total Campaign Discount: " + getTotalCampaignDiscount());
+            System.out.println("Delivery Cost: " + getDeliveryCost());
+            System.out.println("----------------------------------");
+            System.out.println("Final Price: " + getTotalAmountAfterDiscounts() + getDeliveryCost());
+
+        });
     }
 }
