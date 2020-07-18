@@ -1,8 +1,9 @@
 package com.app.service.cart;
 
 import com.app.entity.*;
+import com.app.entity.discount.*;
 import com.app.service.discount.calculate.Discount;
-import com.app.service.discount.calculate.campaign.Calculate;
+import com.app.service.discount.calculate.calculator.*;
 
 import java.util.*;
 
@@ -10,13 +11,13 @@ public class ShoppingCart implements IShoppingCart {
     private final Set<CartItem> shoppingCart = new HashSet<>();
     private List<Campaign> campaignSet = new ArrayList<>();
     private double totalPrice = 0.0;
+
     public void addItem(Product product, int quantity) {
         CartItem item = new CartItem(product, quantity);
         this.shoppingCart.add(item);
     }
 
-    public double getTotalPrice()
-    {
+    public double getTotalPrice() {
         totalPrice += this.shoppingCart.stream().mapToDouble(
                 cartItem -> cartItem.getProduct().getPrice() * cartItem.getQuantity()
         ).sum();
@@ -24,8 +25,7 @@ public class ShoppingCart implements IShoppingCart {
         return totalPrice;
     }
 
-    public void setTotalPrice(double totalPrice)
-    {
+    public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
@@ -37,12 +37,13 @@ public class ShoppingCart implements IShoppingCart {
         this.campaignSet.addAll(Arrays.asList(campaigns));
         Discount discount = new Discount();
         campaignSet.forEach(campaign -> {
-            Calculate calculate = new Calculate(discount.selectCampaignType(campaign));
-            calculate.setShoppingCart(this);
+            Calculator calculator = new Calculator(new CampaignCalculator(this, campaign));
+            calculator.calculate();
         });
     }
 
     public void applyCoupon(Coupon coupon) {
-
+        Calculator calculator = new Calculator(new CouponCalculator(this, coupon));
+        calculator.calculate();
     }
 }

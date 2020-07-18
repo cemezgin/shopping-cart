@@ -1,8 +1,9 @@
-package com.app.entity;
+package com.app.entity.discount;
 
-import com.app.service.discount.calculate.campaign.DiscountType;
+import com.app.entity.Category;
+import com.app.service.discount.calculate.type.DiscountType;
 
-public class Campaign {
+public class Campaign implements IDiscountStyle {
     private Category category;
     private double discount;
     private int minimumItem;

@@ -1,7 +1,7 @@
 package com.app.service.cart;
 
-import com.app.entity.Campaign;
-import com.app.entity.Coupon;
+import com.app.entity.discount.Campaign;
+import com.app.entity.discount.Coupon;
 import com.app.entity.Product;
 
 public interface IShoppingCart {

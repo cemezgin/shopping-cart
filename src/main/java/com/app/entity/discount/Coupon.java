@@ -1,8 +1,8 @@
-package com.app.entity;
+package com.app.entity.discount;
 
-import com.app.service.discount.calculate.campaign.DiscountType;
+import com.app.service.discount.calculate.type.DiscountType;
 
-public class Coupon {
+public class Coupon implements IDiscountStyle {
     private int minimumAmount;
     private double discount;
     private DiscountType discountType;
