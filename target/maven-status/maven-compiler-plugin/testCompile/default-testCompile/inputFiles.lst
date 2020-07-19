@@ -1,0 +1,13 @@
+/Users/cem/IdeaProjects/shopping-cart/src/test/java/com/app/service/cart/ShoppingCartTest.java
+/Users/cem/IdeaProjects/shopping-cart/src/test/java/com/app/service/discount/calculate/calculator/CouponCalculatorTest.java
+/Users/cem/IdeaProjects/shopping-cart/src/test/java/com/app/service/discount/calculate/calculator/CampaignCalculatorTest.java
+/Users/cem/IdeaProjects/shopping-cart/src/test/java/com/app/service/discount/calculate/type/CalculateTest.java
+/Users/cem/IdeaProjects/shopping-cart/src/test/java/com/app/entity/discount/CampaignTest.java
+/Users/cem/IdeaProjects/shopping-cart/src/test/java/com/app/entity/discount/CouponTest.java
+/Users/cem/IdeaProjects/shopping-cart/src/test/java/com/app/service/discount/calculate/DiscountTest.java
+/Users/cem/IdeaProjects/shopping-cart/src/test/java/com/app/service/discount/calculate/type/RateTest.java
+/Users/cem/IdeaProjects/shopping-cart/src/test/java/com/app/service/delivery/DeliveryCostCalculator.java
+/Users/cem/IdeaProjects/shopping-cart/src/test/java/com/app/service/discount/calculate/type/AmountTest.java
+/Users/cem/IdeaProjects/shopping-cart/src/test/java/com/app/entity/ProductTest.java
+/Users/cem/IdeaProjects/shopping-cart/src/test/java/com/app/entity/CategoryTest.java
+/Users/cem/IdeaProjects/shopping-cart/src/test/java/com/app/entity/CartItemTest.java
