@@ -28,7 +28,8 @@ public class CampaignCalculator implements ICalculator {
             if (!quantityByCampaign.containsKey(campaign)) {
                 quantityByCampaign.put(campaign, new HashSet<>());
             }
-            if (campaign.getCategory().equals(cartItem.getProduct().getCategory())) {
+            if (campaign.getCategory().equals(cartItem.getProduct().getCategory()) ||
+                    campaign.getCategory().equals(cartItem.getProduct().getCategory().getParentCategory())) {
                 quantityByCampaign.get(campaign).add(cartItem);
             }
         });
@@ -38,7 +39,7 @@ public class CampaignCalculator implements ICalculator {
                 totalCategoryQuantity[0] = totalCategoryQuantity[0] + cartItem.getQuantity();
             });
 
-            if(totalCategoryQuantity[0] > campaign.getMinimumItem()) {
+            if (totalCategoryQuantity[0] > campaign.getMinimumItem()) {
                 apply();
             }
         });
