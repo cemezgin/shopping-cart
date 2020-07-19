@@ -8,13 +8,12 @@ import java.util.*;
 
 public class ShoppingCart {
     private final Set<CartItem> shoppingCart = new HashSet<>();
-    private List<Campaign> campaignSet = new ArrayList<>();
+    private final List<Campaign> campaignSet = new ArrayList<>();
     private double totalPrice = 0.0;
     private double totalDiscountAmount = 0.0;
     private double totalCouponDiscount = 0.0;
     private double totalCampaignDiscount = 0.0;
     private double deliveryCost = 0.0;
-    private double finalPrice = 0.0;
 
     public void setTotalDiscountAmount(double totalPrice) {
         this.totalDiscountAmount = totalPrice;
@@ -95,14 +94,14 @@ public class ShoppingCart {
         return categorizedShoppingCart;
     }
 
-    public double calculateFinalPrice()
-    {
+    public double calculateFinalPrice() {
         return getTotalDiscountAmount() + getTotalPrice();
     }
 
     public void print() {
         HashMap<Category, Set<CartItem>> categorizedShoppingCart = getCategorizedShoppingCart();
-        finalPrice = calculateFinalPrice() + getDeliveryCost();
+        double finalPrice = calculateFinalPrice() + getDeliveryCost();
+
         categorizedShoppingCart.forEach((category, cartItems) -> {
             System.out.println("------ Category: " + category.getTitle() + " ------");
             cartItems.forEach(cartItem -> {

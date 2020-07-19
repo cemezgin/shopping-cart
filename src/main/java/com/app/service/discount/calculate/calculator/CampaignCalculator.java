@@ -19,9 +19,8 @@ public class CampaignCalculator implements ICalculator {
         this.campaign = campaign;
     }
 
-    public void calculate() {
+    private HashMap<Campaign, Set<CartItem>> mapCampaignAndCartItem() {
         HashMap<Campaign, Set<CartItem>> quantityByCampaign = new HashMap<>();
-        final int[] totalCategoryQuantity = {0};
 
         this.shoppingCart.getShoppingCart().forEach(cartItem -> {
 
@@ -34,7 +33,13 @@ public class CampaignCalculator implements ICalculator {
             }
         });
 
-        quantityByCampaign.forEach((campaign, cartItemSet) -> {
+        return quantityByCampaign;
+    }
+
+    public void calculate() {
+        final int[] totalCategoryQuantity = {0};
+
+        mapCampaignAndCartItem().forEach((campaign, cartItemSet) -> {
             cartItemSet.forEach(cartItem -> {
                 totalCategoryQuantity[0] = totalCategoryQuantity[0] + cartItem.getQuantity();
             });
