@@ -2,7 +2,6 @@ package com.app.service.cart;
 
 import com.app.entity.*;
 import com.app.entity.discount.*;
-import com.app.service.discount.calculate.Discount;
 import com.app.service.discount.calculate.calculator.*;
 
 import java.util.*;
@@ -11,17 +10,18 @@ public class ShoppingCart {
     private final Set<CartItem> shoppingCart = new HashSet<>();
     private List<Campaign> campaignSet = new ArrayList<>();
     private double totalPrice = 0.0;
-    private double totalAmountAfterDiscounts = 0.0;
+    private double totalDiscountAmount = 0.0;
     private double totalCouponDiscount = 0.0;
     private double totalCampaignDiscount = 0.0;
     private double deliveryCost = 0.0;
+    private double finalPrice = 0.0;
 
-    public void setTotalAmountAfterDiscounts(double totalPrice) {
-        this.totalAmountAfterDiscounts = totalPrice;
+    public void setTotalDiscountAmount(double totalPrice) {
+        this.totalDiscountAmount = totalPrice;
     }
 
-    public double getTotalAmountAfterDiscounts() {
-        return totalAmountAfterDiscounts;
+    public double getTotalDiscountAmount() {
+        return totalDiscountAmount;
     }
 
     public void setTotalCouponDiscount(double totalCouponDiscount) {
@@ -50,14 +50,15 @@ public class ShoppingCart {
 
     public void addItem(Product product, int quantity) {
         CartItem item = new CartItem(product, quantity);
+        setTotalPrice(getTotalPrice() + (product.getPrice() * quantity));
         this.shoppingCart.add(item);
     }
 
-    public double getTotalPrice() {
-        totalPrice += this.shoppingCart.stream().mapToDouble(
-                cartItem -> cartItem.getProduct().getPrice() * cartItem.getQuantity()
-        ).sum();
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
+    public double getTotalPrice() {
         return totalPrice;
     }
 
@@ -67,7 +68,6 @@ public class ShoppingCart {
 
     public void applyDiscounts(Campaign... campaigns) {
         this.campaignSet.addAll(Arrays.asList(campaigns));
-        Discount discount = new Discount();
         campaignSet.forEach(campaign -> {
             Calculator calculator = new Calculator(new CampaignCalculator(this, campaign));
             calculator.calculate();
@@ -83,38 +83,44 @@ public class ShoppingCart {
         HashMap<Category, Set<CartItem>> categorizedShoppingCart = new HashMap<>();
         getShoppingCart().forEach(cartItem -> {
             Category category = cartItem.getProduct().getCategory();
-            if (categorizedShoppingCart.containsKey(category)) {
-                categorizedShoppingCart.get(category).add(cartItem);
-            } else {
+
+            if (!categorizedShoppingCart.containsKey(category)) {
                 categorizedShoppingCart.put(category, new HashSet<>());
             }
+
+            categorizedShoppingCart.get(category).add(cartItem);
+
         });
 
         return categorizedShoppingCart;
     }
 
+    public double calculateFinalPrice()
+    {
+        return getTotalDiscountAmount() + getTotalPrice();
+    }
+
     public void print() {
         HashMap<Category, Set<CartItem>> categorizedShoppingCart = getCategorizedShoppingCart();
-
+        finalPrice = calculateFinalPrice() + getDeliveryCost();
         categorizedShoppingCart.forEach((category, cartItems) -> {
             System.out.println("------ Category: " + category.getTitle() + " ------");
             cartItems.forEach(cartItem -> {
                 double price = cartItem.getProduct().getPrice();
                 double quantity = cartItem.getQuantity();
-                System.out.println("Product: " + cartItem.getProduct().getTitle());
+                System.out.println("|||-- Product: " + cartItem.getProduct().getTitle() + "--|||");
                 System.out.println("Quantity: " + quantity);
                 System.out.println("Unit Price: " + price);
                 System.out.println("Total Price: " + price * quantity);
-                System.out.println("-x-x-x-x-x-x-x-x-x-x-");
             });
-
-            System.out.println("Total Amount: " + getTotalPrice());
-            System.out.println("Total Coupon Discount: " + getTotalCouponDiscount());
-            System.out.println("Total Campaign Discount: " + getTotalCampaignDiscount());
-            System.out.println("Delivery Cost: " + getDeliveryCost());
-            System.out.println("----------------------------------");
-            System.out.println("Final Price: " + getTotalAmountAfterDiscounts() + getDeliveryCost());
-
         });
+
+        System.out.println("-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
+        System.out.println("Total Amount: " + getTotalPrice());
+        System.out.println("Total Coupon Discount: " + getTotalCouponDiscount());
+        System.out.println("Total Campaign Discount: " + getTotalCampaignDiscount());
+        System.out.println("Delivery Cost: " + getDeliveryCost());
+        System.out.println("=");
+        System.out.println("Final Price: " + finalPrice);
     }
 }

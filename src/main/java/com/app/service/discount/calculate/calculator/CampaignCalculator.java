@@ -1,9 +1,14 @@
 package com.app.service.discount.calculate.calculator;
 
+import com.app.entity.CartItem;
 import com.app.entity.discount.Campaign;
 import com.app.service.cart.ShoppingCart;
 import com.app.service.discount.calculate.Discount;
 import com.app.service.discount.calculate.type.Calculate;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CampaignCalculator implements ICalculator {
     private final ShoppingCart shoppingCart;
@@ -15,14 +20,25 @@ public class CampaignCalculator implements ICalculator {
     }
 
     public void calculate() {
-        shoppingCart.getShoppingCart().forEach(cartItem -> {
-            int count = 0;
-            String title = cartItem.getProduct().getCategory().getTitle();
-            if (campaign.getCategory().getTitle().equals(title) ||
-                    campaign.getCategory().getParentCategory().getTitle().equals(title)) {
-                count++;
+        HashMap<Campaign, Set<CartItem>> quantityByCampaign = new HashMap<>();
+        final int[] totalCategoryQuantity = {0};
+
+        this.shoppingCart.getShoppingCart().forEach(cartItem -> {
+
+            if (!quantityByCampaign.containsKey(campaign)) {
+                quantityByCampaign.put(campaign, new HashSet<>());
             }
-            if (campaign.getMinimumItem() > count) {
+            if (campaign.getCategory().equals(cartItem.getProduct().getCategory())) {
+                quantityByCampaign.get(campaign).add(cartItem);
+            }
+        });
+
+        quantityByCampaign.forEach((campaign, cartItemSet) -> {
+            cartItemSet.forEach(cartItem -> {
+                totalCategoryQuantity[0] = totalCategoryQuantity[0] + cartItem.getQuantity();
+            });
+
+            if(totalCategoryQuantity[0] > campaign.getMinimumItem()) {
                 apply();
             }
         });

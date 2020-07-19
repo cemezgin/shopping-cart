@@ -5,27 +5,32 @@ import com.app.entity.Product;
 import com.app.entity.discount.Campaign;
 import com.app.entity.discount.Coupon;
 import com.app.service.cart.ShoppingCart;
+import com.app.service.delivery.DeliveryCostCalculator;
 import com.app.service.discount.calculate.type.DiscountType;
 
 public class Main {
-    public static void main() {
+    public static void main(String[] args) {
         Category food = new Category("Food");
-        Category electronic = new Category("Electronic");
-        Category phones = new Category("Phones", electronic);
+       Category electronic = new Category("Electronic");
+       Category phones = new Category("Phones", electronic);
 
         Product apple = new Product("Apple", 100.0, food);
         Product almond = new Product("Almond", 150.0, food);
-        Product huawei = new Product("Huawei", 1000.99, phones);
+        Product huawei = new Product("Huawei", 1000.0, phones);
 
         ShoppingCart cart = new ShoppingCart();
-        cart.addItem(apple, 5);
-        cart.addItem(almond, 4);
-        cart.addItem(huawei,8);
+        cart.addItem(apple, 10);
+       cart.addItem(almond, 4);
+      cart.addItem(huawei,8);
 
-        Coupon coupon = new Coupon(300, 10, DiscountType.Rate);
+        DeliveryCostCalculator deliveryCostCalculator =
+                new DeliveryCostCalculator(1,1,DeliveryCostCalculator.FIXED_COST);
+        deliveryCostCalculator.calculateFor(cart);
+
+       Coupon coupon = new Coupon(4, 10, DiscountType.Rate);
 
         Campaign campaign1 = new Campaign(food,20,8,DiscountType.Amount);
-        Campaign campaign2 = new Campaign(electronic,15,3,DiscountType.Rate);
+        Campaign campaign2 = new Campaign(food,10,3,DiscountType.Rate);
         Campaign campaign3 = new Campaign(phones,100,2,DiscountType.Amount);
 
         cart.applyDiscounts(campaign1,campaign2,campaign3);

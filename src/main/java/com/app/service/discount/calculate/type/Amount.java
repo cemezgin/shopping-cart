@@ -24,7 +24,7 @@ public class Amount implements ICalculateByType {
     }
 
     public double applyDiscount() {
-        shoppingCart.setTotalAmountAfterDiscounts(shoppingCart.getTotalPrice() - discountStyle.getDiscount());
+        shoppingCart.setTotalDiscountAmount(shoppingCart.getTotalDiscountAmount() - discountStyle.getDiscount());
 
         return discountStyle.getDiscount();
     }

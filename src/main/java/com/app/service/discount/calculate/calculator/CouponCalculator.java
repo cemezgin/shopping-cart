@@ -15,7 +15,7 @@ public class CouponCalculator implements ICalculator {
     }
 
     public void calculate() {
-        if (coupon.getMinimumAmount() > shoppingCart.getTotalPrice()) {
+        if (coupon.getMinimumAmount() < shoppingCart.getTotalPrice()) {
             Discount discount = new Discount();
             Calculate calculate = new Calculate(discount.setDiscountType(coupon.getDiscountType()));
             calculate.setCoupon(coupon);
