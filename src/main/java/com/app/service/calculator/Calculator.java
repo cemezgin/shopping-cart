@@ -1,4 +1,4 @@
-package com.app.service.discount.calculate.calculator;
+package com.app.service.calculator;
 
 public class Calculator {
     private final ICalculator calculator;

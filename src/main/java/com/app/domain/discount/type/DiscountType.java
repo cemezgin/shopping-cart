@@ -1,4 +1,4 @@
-package com.app.service.discount.calculate.type;
+package com.app.domain.discount.type;
 
 public enum DiscountType {
     Rate,

@@ -6,7 +6,7 @@ import com.app.entity.discount.Campaign;
 import com.app.entity.discount.Coupon;
 import com.app.service.cart.ShoppingCart;
 import com.app.service.delivery.DeliveryCostCalculator;
-import com.app.service.discount.calculate.type.DiscountType;
+import com.app.domain.discount.type.DiscountType;
 
 public class Main {
     public static void main(String[] args) {

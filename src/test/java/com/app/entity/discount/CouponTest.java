@@ -1,6 +1,6 @@
 package com.app.entity.discount;
 
-import com.app.service.discount.calculate.type.DiscountType;
+import com.app.domain.discount.type.DiscountType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

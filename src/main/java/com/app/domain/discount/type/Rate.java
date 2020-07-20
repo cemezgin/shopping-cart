@@ -1,11 +1,13 @@
-package com.app.service.discount.calculate.type;
+package com.app.domain.discount.type;
 
-import com.app.entity.discount.*;
+import com.app.entity.discount.Campaign;
+import com.app.entity.discount.Coupon;
+import com.app.entity.discount.IDiscountStyle;
 import com.app.service.cart.ShoppingCart;
 
-public class Amount implements ICalculateByType {
-    private ShoppingCart shoppingCart;
+public class Rate implements ICalculateByType {
     private IDiscountStyle discountStyle;
+    private ShoppingCart shoppingCart;
 
     public void setCampaign(Campaign campaign) {
         setDiscountStyle(campaign);
@@ -24,8 +26,9 @@ public class Amount implements ICalculateByType {
     }
 
     public double applyDiscount() {
-        shoppingCart.setTotalDiscountAmount(shoppingCart.getTotalDiscountAmount() - discountStyle.getDiscount());
+        double netDiscountAsAmount = shoppingCart.getTotalPrice() * (discountStyle.getDiscount() / 100);
+        shoppingCart.setTotalDiscountAmount(shoppingCart.getTotalDiscountAmount() - netDiscountAsAmount);
 
-        return discountStyle.getDiscount();
+        return netDiscountAsAmount;
     }
 }

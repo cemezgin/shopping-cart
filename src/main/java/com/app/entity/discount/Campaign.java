@@ -1,7 +1,7 @@
 package com.app.entity.discount;
 
 import com.app.entity.Category;
-import com.app.service.discount.calculate.type.DiscountType;
+import com.app.domain.discount.type.DiscountType;
 
 public class Campaign implements IDiscountStyle {
     private Category category;

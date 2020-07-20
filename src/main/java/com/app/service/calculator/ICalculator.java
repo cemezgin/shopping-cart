@@ -1,4 +1,4 @@
-package com.app.service.discount.calculate.calculator;
+package com.app.service.calculator;
 
 public interface ICalculator {
     void calculate();

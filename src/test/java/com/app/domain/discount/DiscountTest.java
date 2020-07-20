@@ -1,8 +1,8 @@
-package com.app.service.discount.calculate;
+package com.app.domain.discount;
 
-import com.app.service.discount.calculate.type.Amount;
-import com.app.service.discount.calculate.type.DiscountType;
-import com.app.service.discount.calculate.type.Rate;
+import com.app.domain.discount.type.Amount;
+import com.app.domain.discount.type.DiscountType;
+import com.app.domain.discount.type.Rate;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;

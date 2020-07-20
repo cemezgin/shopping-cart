@@ -5,7 +5,7 @@ import com.app.entity.Product;
 import com.app.entity.discount.Campaign;
 import com.app.entity.discount.Coupon;
 import com.app.service.delivery.DeliveryCostCalculator;
-import com.app.service.discount.calculate.type.DiscountType;
+import com.app.domain.discount.type.DiscountType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

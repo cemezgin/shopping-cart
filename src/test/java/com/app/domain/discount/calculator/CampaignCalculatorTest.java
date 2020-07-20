@@ -1,10 +1,10 @@
-package com.app.service.discount.calculate.calculator;
+package com.app.domain.discount.calculator;
 
 import com.app.entity.Category;
 import com.app.entity.Product;
 import com.app.entity.discount.Campaign;
 import com.app.service.cart.ShoppingCart;
-import com.app.service.discount.calculate.type.DiscountType;
+import com.app.domain.discount.type.DiscountType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,6 +1,6 @@
-package com.app.service.discount.calculate;
+package com.app.domain.discount;
 
-import com.app.service.discount.calculate.type.*;
+import com.app.domain.discount.type.*;
 
 public class Discount {
 
