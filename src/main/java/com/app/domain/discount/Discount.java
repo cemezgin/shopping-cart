@@ -2,20 +2,21 @@ package com.app.domain.discount;
 
 import com.app.domain.discount.type.*;
 
+import java.util.HashMap;
+
 public class Discount {
+    private final HashMap<DiscountType, CalculateByTypeInterface> selectDiscountType = new HashMap<>();
+
+    public Discount() {
+        selectDiscountType.put(DiscountType.Amount, new Amount());
+        selectDiscountType.put(DiscountType.Rate, new Rate());
+    }
+
     public CalculateByTypeInterface setDiscountType(DiscountType discountType) {
         return select(discountType);
     }
 
-    //@todo Implement for open-closed
     private CalculateByTypeInterface select(DiscountType discountType) {
-        switch (discountType) {
-            case Rate:
-                return new Rate();
-            case Amount:
-                return new Amount();
-            default:
-                return null;
-        }
+        return selectDiscountType.get(discountType);
     }
 }
