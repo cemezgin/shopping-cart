@@ -115,10 +115,10 @@ public class ShoppingCart {
         });
 
         System.out.println("-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
-        System.out.println("Total Amount: " + getTotalPrice());
-        System.out.println("Total Coupon Discount: " + getTotalCouponDiscount());
-        System.out.println("Total Campaign Discount: " + getTotalCampaignDiscount());
-        System.out.println("Delivery Cost: " + getDeliveryCost());
+        System.out.println("+Total Amount: " + getTotalPrice());
+        System.out.println("-Total Coupon Discount: " + getTotalCouponDiscount());
+        System.out.println("-Total Campaign Discount: " + getTotalCampaignDiscount());
+        System.out.println("+Delivery Cost: " + getDeliveryCost());
         System.out.println("=");
         System.out.println("Final Price: " + finalPrice);
     }
