@@ -3,15 +3,15 @@ package com.app.domain.discount.type;
 import com.app.entity.discount.*;
 import com.app.service.cart.ShoppingCart;
 
-public class Amount implements ICalculateByType {
+public class Amount implements CalculateByTypeInterface {
     private ShoppingCart shoppingCart;
-    private IDiscountStyle discountStyle;
+    private DiscountStyleInterface discountStyle;
 
     public void setCampaign(Campaign campaign) {
         setDiscountStyle(campaign);
     }
 
-    private void setDiscountStyle(IDiscountStyle discountStyle) {
+    private void setDiscountStyle(DiscountStyleInterface discountStyle) {
         this.discountStyle = discountStyle;
     }
 

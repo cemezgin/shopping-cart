@@ -1,5 +1,5 @@
 package com.app.entity.discount;
 
-public interface IDiscountStyle {
+public interface DiscountStyleInterface {
     double getDiscount();
 }

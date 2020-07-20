@@ -4,11 +4,11 @@ import com.app.domain.discount.type.*;
 
 public class Discount {
 
-    public ICalculateByType setDiscountType(DiscountType discountType) {
+    public CalculateByTypeInterface setDiscountType(DiscountType discountType) {
         return select(discountType);
     }
 
-    private ICalculateByType select(DiscountType discountType) {
+    private CalculateByTypeInterface select(DiscountType discountType) {
         switch (discountType) {
             case Rate:
                 return new Rate();

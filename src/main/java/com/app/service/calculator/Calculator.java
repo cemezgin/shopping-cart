@@ -1,9 +1,9 @@
 package com.app.service.calculator;
 
 public class Calculator {
-    private final ICalculator calculator;
+    private final CalculatorInterface calculator;
 
-    public Calculator(ICalculator calculator) {
+    public Calculator(CalculatorInterface calculator) {
         this.calculator = calculator;
     }
 

@@ -68,13 +68,13 @@ public class ShoppingCart {
     public void applyDiscounts(Campaign... campaigns) {
         this.campaignSet.addAll(Arrays.asList(campaigns));
         campaignSet.forEach(campaign -> {
-            Calculator calculator = new Calculator(new CampaignCalculator(this, campaign));
+            Calculator calculator = new Calculator(new CampaignCalculatorInterface(this, campaign));
             calculator.calculate();
         });
     }
 
     public void applyCoupon(Coupon coupon) {
-        Calculator calculator = new Calculator(new CouponCalculator(this, coupon));
+        Calculator calculator = new Calculator(new CouponCalculatorInterface(this, coupon));
         calculator.calculate();
     }
 

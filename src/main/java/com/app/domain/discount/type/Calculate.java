@@ -6,9 +6,9 @@ import com.app.entity.discount.Coupon;
 import com.app.service.cart.ShoppingCart;
 
 public class Calculate {
-    private final ICalculateByType typeStrategy;
+    private final CalculateByTypeInterface typeStrategy;
 
-    public Calculate(ICalculateByType typeStrategy) {
+    public Calculate(CalculateByTypeInterface typeStrategy) {
         this.typeStrategy = typeStrategy;
     }
 

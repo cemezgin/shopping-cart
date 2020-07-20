@@ -5,11 +5,11 @@ import com.app.service.cart.ShoppingCart;
 import com.app.domain.discount.Discount;
 import com.app.domain.discount.type.Calculate;
 
-public class CouponCalculator implements ICalculator {
+public class CouponCalculatorInterface implements CalculatorInterface {
     private final ShoppingCart shoppingCart;
     private final Coupon coupon;
 
-    public CouponCalculator(ShoppingCart shoppingCart, Coupon coupon) {
+    public CouponCalculatorInterface(ShoppingCart shoppingCart, Coupon coupon) {
         this.shoppingCart = shoppingCart;
         this.coupon = coupon;
     }

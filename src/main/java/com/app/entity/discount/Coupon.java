@@ -2,7 +2,7 @@ package com.app.entity.discount;
 
 import com.app.domain.discount.type.DiscountType;
 
-public class Coupon implements IDiscountStyle {
+public class Coupon implements DiscountStyleInterface {
     private int minimumAmount;
     private double discount;
     private DiscountType discountType;

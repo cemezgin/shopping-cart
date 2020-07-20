@@ -2,18 +2,18 @@ package com.app.domain.discount.type;
 
 import com.app.entity.discount.Campaign;
 import com.app.entity.discount.Coupon;
-import com.app.entity.discount.IDiscountStyle;
+import com.app.entity.discount.DiscountStyleInterface;
 import com.app.service.cart.ShoppingCart;
 
-public class Rate implements ICalculateByType {
-    private IDiscountStyle discountStyle;
+public class Rate implements CalculateByTypeInterface {
+    private DiscountStyleInterface discountStyle;
     private ShoppingCart shoppingCart;
 
     public void setCampaign(Campaign campaign) {
         setDiscountStyle(campaign);
     }
 
-    private void setDiscountStyle(IDiscountStyle discountStyle) {
+    private void setDiscountStyle(DiscountStyleInterface discountStyle) {
         this.discountStyle = discountStyle;
     }
 

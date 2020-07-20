@@ -1,5 +1,5 @@
 package com.app.service.calculator;
 
-public interface ICalculator {
+public interface CalculatorInterface {
     void calculate();
 }

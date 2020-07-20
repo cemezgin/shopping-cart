@@ -10,11 +10,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CampaignCalculator implements ICalculator {
+public class CampaignCalculatorInterface implements CalculatorInterface {
     private final ShoppingCart shoppingCart;
     private final Campaign campaign;
 
-    public CampaignCalculator(ShoppingCart shoppingCart, Campaign campaign) {
+    public CampaignCalculatorInterface(ShoppingCart shoppingCart, Campaign campaign) {
         this.shoppingCart = shoppingCart;
         this.campaign = campaign;
     }

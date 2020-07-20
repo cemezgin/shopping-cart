@@ -3,7 +3,7 @@ package com.app.entity.discount;
 import com.app.entity.Category;
 import com.app.domain.discount.type.DiscountType;
 
-public class Campaign implements IDiscountStyle {
+public class Campaign implements DiscountStyleInterface {
     private Category category;
     private double discount;
     private int minimumItem;
